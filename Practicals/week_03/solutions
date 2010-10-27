@@ -1,0 +1,159 @@
+solutions -- solution to Data Structures practical week #3
+
+    Copyright © 2010 Jan Minář <rdancer@rdancer.org>
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License version 2 (two),
+    as published by the Free Software Foundation.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+
+1.
+
+     1:	Input: integer L, integer H
+     2:	Output: ?
+     3:	integer x = L
+     4:	integer p = 1
+     5:	while (x <= H) do
+     6:	    if (x is odd) then
+     7:		p = p * x
+     8:	    endif
+     9:	    x = x + 1
+    10:	endwhile
+    11:	print "result is ", p
+
+(a) What does the code do?
+
+Given two integers L, H, this function computes the product of all odd numbers n; L <= n <= H.  The product is computed in the variable p, and in the end printed out.  In case L > H, one (1) is output.
+
+(b)(i) rewrite for do-while
+
+     1:	Input: integer L, integer H
+     2:	Output: ?
+     3:	if (L > H)
+     4:	    print "result is 1"
+     5:	else
+     6:	    integer x = L
+     7:	    integer p = 1
+     8:	    do
+     9:		if (x is odd) then
+    10:		    p = p * x
+    11:		endif
+    12:		x = x + 1
+    13:	    while (x <= H)
+    14:	    print "result is ", p
+    15:	endif
+
+(b)(ii) rewrite for for-endfor
+
+     1:	Input: integer L, integer H
+     2:	Output: ?
+     3:	integer p = 1
+     4:	for (x = L; x <= H; x = x + 1)
+     5:	    if (x is odd) then
+     6:		p = p * x
+     7:	    endif
+     8:	endfor
+     9:	print "result is ", p
+
+
+2. string matching
+
+T.length == n
+S.length < n
+
+     1:	// Print indices of occurences of string S in string T.  T must
+     2:	// be strictly longer than S.  If S is not found in T, output a
+     3:	// message saying so.
+     4:	
+     5:	Input:
+     6:		string T,  // haystack
+     7:		string S,  // needle
+     8:		integer n, // T.length
+     9:		integer m  // S.length
+    10:	Output: integers indices[] // array of indices of occurences of
+    11:				   // S in T (1-based)
+    12:	
+    13:	if (n > m)
+    14:	    print "Error: haystack must be longer then needle"
+    15:	else
+    16:	    integer indicesIndex = 0
+    17:	
+    18:	    for (integer i = 0; i < n; i = i + 1)
+    19:		if (T[i] == S[1])
+    20:		    for (integer j = 0; j < m AND i + j < n; j = j + 1)
+    21:			if (T[i + j] != S[j])
+    22:			    goto 32 // breakOnlyPartialMatch
+    23:			else
+    24:			    if (j == m - 1)
+    25:				// Whole substring has been compared and
+    26:	                        // matches
+    27:				indices[indicesIndex] = i + 1
+    28:				indicesIndex = indicesIndex + 1
+    29:			    endif
+    30:			endif
+    31:		    endfor
+    32:	// breakOnlyPartialMatch:
+    33:		endif
+    34:	    endfor
+    35:	
+    36:	    // Print the results
+    37:	
+    38:	    if (indicesIndex == 0)
+    39:		print "Substring not found"
+    40:	    else
+    41:		for (integer i = 0; i < indicesIndex; i = i + 1)
+    42:		    print indices[indicesIndex]
+    43:		endfor
+    44:	    endif
+    45:	endif
+
+
+3. decide whether a number is a prime
+
+     1:	// This function prints out a message stating whether a number is
+     2:	// a prime
+     3:	
+     4:	Input: integer candidate // the potential prime to be tested
+     5:	Output: // nothing
+     6:	
+     7:	
+     8:	// One is not considered a prime (nor a composite; cf. [Weisstein])
+     9:	// Zero is not considered a prime nor a composite either, cf.
+    10:	// [DrRob]
+    11:	if (candidate == 0 OR candidate == 1 OR candidate = -1)
+    12:	    print candidate, ": neither a prime nor a composite"
+    13:	    goto 26 // end
+    14:	endif
+    15:	
+    16:	for (integer i = 2; i <= square root of candidate; i = i + 2)
+    17:	    if (i divides candidate)
+    18:		print candidate, ": not a prime (least divisor: ", i, ")"
+    19:		goto 26 // end
+    20:	    endif
+    21:	endfor
+    22:	
+    23:	// Is a prime
+    24:	print candidate, ": prime"
+    25:	
+    26:	// end:
+
+
+
+References:
+
+[Weisstein] Weisstein, Eric W.: "Prime Number". in MathWorld--A Wolfram Web
+Resource, on-line, URL: http://mathworld.wolfram.com/PrimeNumber.html
+(accessed on 2010-10-27)
+
+[DrRob] "Doctor Rob": "1 and 0: Prime or Composite?". in The Math Forum--Ask
+Dr. Math, on-line, URL: http://mathforum.org/library/drmath/view/57036.html
+(accessed on 2010-10-27)
