@@ -1,0 +1,4 @@
+#!/bin/sh
+# sets -- print the superset of a set of elements
+
+make -s && java Sets "$@"

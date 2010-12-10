@@ -1,0 +1,37 @@
+README -- Information about this subdirectory
+
+
+    Copyright © 2010 Jan Minář <rdancer@rdancer.org>
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License version 2 (two),
+    as published by the Free Software Foundation.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+
+Exercise C-3.14 from [Goodrich 2005]: "Write a recursive Java program that
+will output all the subsets of a set of _n_ elements (without repeating any
+subsets)."
+
+Solution: We know that the number of elements ("cardinality") of a set of
+all subsets ("superset") of any set of n elements is 2^n.  We can represent
+the all the combinations of subsets by a set of all possible binary strings
+of length n, with a digit at position k representing the k-th element of
+the original set.  A one corresponds to the element present, zero to the
+element absent from the subset -- so that a string of zeroes represents the
+empty set, a string of ones represents the original set, and so on and so
+forth.
+
+
+[Goodrich 2005] Goodrich, Michael T. and Tamassia, Roberto (2005) Data
+    Structures and Algorithms in Java. 4th edition, John Wiley & Sons,
+    ISBN 0471738840
+
